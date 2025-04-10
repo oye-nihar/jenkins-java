@@ -11,7 +11,7 @@ pipeline{
         string(name: 'ImageName', description: "name of the docker build", defaultValue: 'javapp')
         string(name: 'ImageTag', description: "tag of the docker build", defaultValue: 'v1')
         string(name: 'DockerHubUser', description: "name of the Application", defaultValue: 'rkg410')
-        string(name: 'jfrogUrl', description: "Base URL of JFrog (e.g., http://44.202.242.34:8081)", defaultValue: 'http://')
+        string(name: 'jfrogUrl', description: "Base URL of JFrog (e.g., http://44.202.242.34:8082)", defaultValue: 'http://')
         string(name: 'jfrogRepo', description: "name of the repo created in jfrog", defaultValue: 'example-repo-local')
         string(name: 'jfrogUserName', description: "username of jfrog", defaultValue: 'admin')
         string(name: 'jfrogPassword', description: "password of jfrog", defaultValue: 'password')
@@ -83,7 +83,7 @@ pipeline{
             steps {
                 script {
                     def jarFile = 'kubernetes-configmap-reload-0.0.1-SNAPSHOT.jar'
-                    def jfrogUploadUrl = "${params.jfrogUrl}/artifactory/${params.jfrogRepo}/${jarFile}"
+                    def jfrogUploadUrl = "${params.jfrogUrl}/artifactory/${params.jfrogRepo}"
                     
                     echo "Uploading ${jarFile} to JFrog at ${jfrogUploadUrl}"
 
