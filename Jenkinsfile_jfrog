@@ -86,8 +86,9 @@ pipeline{
                     sh """
                         cd target
                         for jar in *.jar; do
-                        echo "Uploading \$jar..."
-                        curl -X PUT -u ${params.jfrogUserName}:${params.jfrogPassword} -T "\$jar" "${jfrogUploadUrl}"
+                            echo "Uploading \$jar..."
+                            curl -X PUT -u ${params.jfrogUserName}:${params.jfrogPassword} -T "\$jar" "${jfrogUploadUrl}"
+                        done
                     """
                 }
             }
