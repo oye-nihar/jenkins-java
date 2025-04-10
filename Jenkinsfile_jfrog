@@ -83,12 +83,11 @@ pipeline{
             steps {
                 script {
                     def jarFile = 'kubernetes-configmap-reload-0.0.1-SNAPSHOT.jar'
-                    def jfrogUploadUrl = "${params.jfrogUrl}/artifactory/${params.jfrogRepo}"
-                    pwd
-                    ls                    
+                    def jfrogUploadUrl = "${params.jfrogUrl}/artifactory/${params.jfrogRepo}"                 
                     echo "Uploading ${jarFile} to JFrog at ${jfrogUploadUrl}"
-
                     sh """
+                        pwd
+                        ls
                         curl -X PUT -u ${params.jfrogUserName}:${params.jfrogPassword} \
                         -T ${jarFile} \
                         "${jfrogUploadUrl}"
