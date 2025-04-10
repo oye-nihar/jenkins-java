@@ -86,8 +86,7 @@ pipeline{
                     def jfrogUploadUrl = "${params.jfrogUrl}/artifactory/${params.jfrogRepo}"                 
                     echo "Uploading ${jarFile} to JFrog at ${jfrogUploadUrl}"
                     sh """
-                        pwd
-                        ls
+                        cd target
                         curl -X PUT -u ${params.jfrogUserName}:${params.jfrogPassword} \
                         -T ${jarFile} \
                         "${jfrogUploadUrl}"
