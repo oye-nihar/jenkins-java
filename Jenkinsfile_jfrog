@@ -88,9 +88,9 @@ pipeline{
                     sh """
                         cd target
                         ls
-                        curl -X PUT -u ${params.jfrogUserName}:${params.jfrogPassword} \
-                        -T ${jarFile} \
-                        "${jfrogUploadUrl}"
+                        // curl -X PUT -u ${params.jfrogUserName}:${params.jfrogPassword} \
+                        // -T ${jarFile} \
+                        // "${jfrogUploadUrl}"
                     """
                 }
             }
