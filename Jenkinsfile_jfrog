@@ -82,7 +82,7 @@ pipeline{
             steps {
                 script {
                     def jfrogUploadUrl = "${params.jfrogUrl}/artifactory/${params.jfrogRepo}/"                 
-                    echo "Uploading ${jarFile} to JFrog at ${jfrogUploadUrl}"
+                    echo "Uploading all jars to JFrog at ${jfrogUploadUrl}"
                     sh """
                         cd target
                         for jar in *.jar; do
