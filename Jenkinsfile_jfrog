@@ -3,7 +3,6 @@
 pipeline{
 
     agent any
-    //agent { label 'Demo' }
 
     parameters{
 
@@ -49,26 +48,26 @@ pipeline{
                }
             }
         }
-    //     stage('Static code analysis: Sonarqube'){
-    //      when { expression {  params.action == 'create' } }
-    //         steps{
-    //            script{
+        stage('Static code analysis: Sonarqube'){
+         when { expression {  params.action == 'create' } }
+            steps{
+               script{
                    
-    //                def SonarQubecredentialsId = 'sonarqube-api'
-    //                statiCodeAnalysis(SonarQubecredentialsId)
-    //            }
-    //         }
-    //    }
-    //    stage('Quality Gate Status Check : Sonarqube'){
-    //      when { expression {  params.action == 'create' } }
-    //         steps{
-    //            script{
+                   def SonarQubecredentialsId = 'sonarqube-api'
+                   statiCodeAnalysis(SonarQubecredentialsId)
+               }
+            }
+       }
+       stage('Quality Gate Status Check : Sonarqube'){
+         when { expression {  params.action == 'create' } }
+            steps{
+               script{
                    
-    //                def SonarQubecredentialsId = 'sonarqube-api'
-    //                QualityGateStatus(SonarQubecredentialsId)
-    //            }
-    //         }
-    //    }
+                   def SonarQubecredentialsId = 'sonarqube-api'
+                   QualityGateStatus(SonarQubecredentialsId)
+               }
+            }
+       }
         stage('Maven Build : maven'){
          when { expression {  params.action == 'create' } }
             steps{
@@ -82,13 +81,13 @@ pipeline{
          when { expression {  params.action == 'create' } }
             steps {
                 script {
-                    def jarFile = 'kubernetes-configmap-reload-0.0.1-SNAPSHOT.jar'
-                    def jfrogUploadUrl = "${params.jfrogUrl}/artifactory/${params.jfrogRepo}"                 
+                    def jfrogUploadUrl = "${params.jfrogUrl}/artifactory/${params.jfrogRepo}/"                 
                     echo "Uploading ${jarFile} to JFrog at ${jfrogUploadUrl}"
                     sh """
                         cd target
-                        ls
-                        curl -X PUT -u ${params.jfrogUserName}:${params.jfrogPassword} -T ${jarFile} "${jfrogUploadUrl}"
+                        for jar in *.jar; do
+                        echo "Uploading \$jar..."
+                        curl -X PUT -u ${params.jfrogUserName}:${params.jfrogPassword} -T "\$jar" "${jfrogUploadUrl}"
                     """
                 }
             }
