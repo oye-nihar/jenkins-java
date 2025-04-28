@@ -27,7 +27,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class MinikubeSampleApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MinikubeSampleApplication.class, args);
+        SpringApplication application = new SpringApplication(MinikubeSampleApplication.class);
+        application.setDefaultProperties(
+            java.util.Collections.singletonMap("server.port", "8090"));  // Change the port to 8090
+        application.run(args);
     }
 
     @GetMapping("/")
@@ -35,4 +38,5 @@ public class MinikubeSampleApplication {
         return "Hello from Dockerized Spring Boot App!";
     }
 }
+
 
