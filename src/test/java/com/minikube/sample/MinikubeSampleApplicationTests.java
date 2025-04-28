@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-@TestPropertySource(properties = "server.port=8087") // Test Property Source
+@TestPropertySource(properties = "server.port=8090")  // Use the same port for testing
 @AutoConfigureMockMvc
 class MinikubeSampleApplicationTests {
 
@@ -55,5 +55,6 @@ class MinikubeSampleApplicationTests {
                .andExpect(content().string("Hello from Dockerized Spring Boot App!"));
     }
 }
+
 
 
