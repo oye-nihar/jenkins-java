@@ -15,7 +15,6 @@
 
 // }
 
-
 package com.minikube.sample;
 
 import org.junit.jupiter.api.Test;
@@ -24,6 +23,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -37,11 +37,13 @@ class MinikubeSampleApplicationTests {
 
     @Test
     void contextLoads() {
+        // Simply checks Spring context loads without errors
     }
 
     @Test
     void mainMethodTest() {
-        MinikubeSampleApplication.main(new String[]{});
+        assertThatCode(() -> MinikubeSampleApplication.main(new String[]{}))
+            .doesNotThrowAnyException();
     }
 
     @Test
@@ -51,5 +53,4 @@ class MinikubeSampleApplicationTests {
                .andExpect(content().string("Hello from Dockerized Spring Boot App!"));
     }
 }
-
 
