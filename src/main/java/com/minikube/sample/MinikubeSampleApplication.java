@@ -18,13 +18,11 @@
 package com.minikube.sample;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-@EnableAutoConfiguration
 @RestController
 public class MinikubeSampleApplication {
 
@@ -33,7 +31,8 @@ public class MinikubeSampleApplication {
     }
 
     @GetMapping("/")
-    public String home() {
+    String home() {
         return "Hello from Dockerized Spring Boot App!";
     }
 }
+
