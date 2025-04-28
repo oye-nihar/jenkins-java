@@ -44,17 +44,31 @@ class MinikubeSampleApplicationTests {
 
     @Test
     void mainMethodTest() {
+        // This test will ensure that the main method runs without exceptions
         assertThatCode(() -> MinikubeSampleApplication.main(new String[]{}))
             .doesNotThrowAnyException();
     }
 
     @Test
     void homeEndpointTest() throws Exception {
+        // This test ensures the home endpoint returns the expected message
         mockMvc.perform(get("/"))
                .andExpect(status().isOk())
                .andExpect(content().string("Hello from Dockerized Spring Boot App!"));
     }
+
+    @Test
+    void testApplicationStart() {
+        // Test that the application starts properly (can be considered a coverage for the SpringApplication part)
+        assertThatCode(() -> {
+            SpringApplication application = new SpringApplication(MinikubeSampleApplication.class);
+            application.setDefaultProperties(
+                java.util.Collections.singletonMap("server.port", "8090"));
+            application.run();
+        }).doesNotThrowAnyException();
+    }
 }
+
 
 
 
