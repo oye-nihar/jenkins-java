@@ -30,20 +30,26 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class MinikubeSampleApplicationTests { // No 'public' here
+class MinikubeSampleApplicationTests {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    void contextLoads() { // No 'public' here
+    void contextLoads() {
     }
 
     @Test
-    void homeEndpointTest() throws Exception { // No 'public' here
+    void mainMethodTest() {
+        MinikubeSampleApplication.main(new String[]{});
+    }
+
+    @Test
+    void homeEndpointTest() throws Exception {
         mockMvc.perform(get("/"))
                .andExpect(status().isOk())
                .andExpect(content().string("Hello from Dockerized Spring Boot App!"));
     }
 }
+
 
