@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-@TestPropertySource(properties = "server.port=8090")  // Use the same port for testing
+@TestPropertySource(properties = "server.port=8092")  // Use the same port for testing
 @AutoConfigureMockMvc
 class MinikubeSampleApplicationTests {
 
