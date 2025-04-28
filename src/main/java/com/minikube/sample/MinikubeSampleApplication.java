@@ -29,7 +29,7 @@ public class MinikubeSampleApplication {
     public static void main(String[] args) {
         SpringApplication application = new SpringApplication(MinikubeSampleApplication.class);
         application.setDefaultProperties(
-            java.util.Collections.singletonMap("server.port", "8090"));  // Change the port to 8090
+            java.util.Collections.singletonMap("server.port", "8092"));  // Change the port to 8090
         application.run(args);
     }
 
