@@ -13,7 +13,7 @@ pipeline{
         string(name: 'jfrogUrl', description: "Base URL of JFrog (e.g., http://44.202.242.34:8082)", defaultValue: 'http://')
         string(name: 'jfrogRepo', description: "name of the repo created in jfrog", defaultValue: 'example-repo-local')
         string(name: 'jfrogUserName', description: "username of jfrog", defaultValue: 'admin')
-        string(name: 'jfrogPassword', description: "password of jfrog", defaultValue: 'password')
+        string(name: 'jfrogToken', description: "token of jfrog", defaultValue: 'password')
         
     }
 
@@ -87,7 +87,7 @@ pipeline{
                         cd target
                         for jar in *.jar; do
                             echo "Uploading \$jar..."
-                            curl -X PUT -u ${params.jfrogUserName}:${params.jfrogPassword} -T "\$jar" "${jfrogUploadUrl}"
+                            curl -X PUT -H "Authorization: Bearer ${params.jfrogToken}" -T "\$jar" "${jfrogUploadUrl}"
                         done
                     """
                 }
