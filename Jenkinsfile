@@ -1,4 +1,4 @@
-@Library('my-shared-library') _
+@Library('my-shared-library') _           # ( _) it is used to import everything from my-shared-library. It is analogical to * in scipting like rm -rf *
 
 pipeline{
 
