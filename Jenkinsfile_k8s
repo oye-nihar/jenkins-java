@@ -16,7 +16,6 @@ pipeline{
         string(name: 'jfrogToken', description: "token of jfrog", defaultValue: 'password')
         string(name: 'gitRepoName', description: "Name of the git repo where kuberenets manifests files are located", defaultValue: 'java')
         string(name: 'gitUserName', description: "Username of git repo", defaultValue: 'ravi1003')
-        string(name: 'githubToken', description: "Token for git repo", defaultValue: 'AAWEWERJWORUWNK')
         
     }
 
@@ -142,7 +141,7 @@ pipeline{
                     sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" kubernetes/deployment.yml
                     git add kubernetes/deployment.yml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
-                    git push https://${params.githubToken}@github.com/${params.gitUserName}/${params.gitRepoName} HEAD:main
+                    git push https://${GITHUB_TOKEN}@github.com/${params.gitUserName}/${params.gitRepoName} HEAD:main
                 '''
             }
         }
