@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myjavaapp-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myjavaapp
+  template:
+    metadata:
+      labels:
+        app: myjavaapp
+    spec:
+      containers:
+      - name: myjavaapp
+        image: rkg410/javapp:v1  # Updated image
+        ports:
+        - containerPort: 8080   # Still matches the internal app port
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myjavaapp-service
+spec:
+  selector:
+    app: myjavaapp
+  ports:
+  - name: http
+    port: 8092            # External port exposed by LoadBalancer
+    targetPort: 8080      # Maps to the containerPort in the pod
+  type: LoadBalancer
