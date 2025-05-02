@@ -1,3 +1,37 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: myjavaapp-deployment
+# spec:
+#   replicas: 3
+#   selector:
+#     matchLabels:
+#       app: myjavaapp
+#   template:
+#     metadata:
+#       labels:
+#         app: myjavaapp
+#     spec:
+#       containers:
+#       - name: myjavaapp
+#         image: 600735812827.dkr.ecr.us-west-1.amazonaws.com/javasession2:latest
+#         ports:
+#         - containerPort: 8080
+
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: myjavaapp-service
+# spec:
+#   selector:
+#     app: myjavaapp
+#   ports:
+#   - name: http
+#     port: 80
+#     targetPort: 8080
+#   type: LoadBalancer
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,9 +48,9 @@ spec:
     spec:
       containers:
       - name: myjavaapp
-        image: 600735812827.dkr.ecr.us-west-1.amazonaws.com/javasession2:latest
+        image: rkg410/javapp:v1  # Updated image
         ports:
-        - containerPort: 8080
+        - containerPort: 8080   # Still matches the internal app port
 
 ---
 apiVersion: v1
@@ -28,6 +62,7 @@ spec:
     app: myjavaapp
   ports:
   - name: http
-    port: 80
-    targetPort: 8080
+    port: 8092            # External port exposed by LoadBalancer
+    targetPort: 8080      # Maps to the containerPort in the pod
   type: LoadBalancer
+
