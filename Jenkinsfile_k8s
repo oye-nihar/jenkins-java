@@ -137,10 +137,9 @@ pipeline{
                 sh '''
                     git config user.email "ravi410211@gmail.com"
                     git config user.name "ravigupta"
-                    BUILD_NUMBER=${params.ImageTag}
-                    sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" kubernetes/deployment.yml
+                    sed -i "s/replaceImageTag/${params.ImageTag}/g" kubernetes/deployment.yml
                     git add kubernetes/deployment.yml
-                    git commit -m "Update deployment image to version ${BUILD_NUMBER}"
+                    git commit -m "Update deployment image to version ${params.ImageTag}"
                     git push https://${GITHUB_TOKEN}@github.com/${params.gitUserName}/${params.gitRepoName} HEAD:main
                 '''
             }
