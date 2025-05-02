@@ -130,6 +130,7 @@ pipeline{
             }
         }
        stage('Update Deployment File') {
+        when { expression {  params.action == 'create' } }
         environment {
             GIT_REPO_NAME = "java"
             GIT_USER_NAME = "ravi1003"
