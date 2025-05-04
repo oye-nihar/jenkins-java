@@ -18,6 +18,6 @@ public class MinikubeSampleApplication {
     // GET endpoint for "/"
     @GetMapping("/")
     public String hello() {
-        return "Happy Learning!";
+        return "Devops is Cool!";
     }
 }
