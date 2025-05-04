@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: myjavaapp
-        image: rkg410/javapp:v2
+        image: rkg410/javapp:v5
         ports:
         - containerPort: 8080
 
